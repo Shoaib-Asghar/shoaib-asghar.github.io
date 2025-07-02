@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Name | Software Engineer & AI Enthusiast</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Fira+Code&display=swap" rel="stylesheet" />
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style/main.css" />
+  <!-- JavaScript -->
+  <script src="script/main.js" defer></script>
+</head>
+<body class="dark-theme">
+  <header>
+    <div class="logo">Shoaib Asghar</div>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#certificates">Certificates</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#organizations">Orgs</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><button id="toggle-theme" aria-label="Toggle theme">🌙</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero">
+      <h1>Hi, I’m <span class="highlight">Shoaib</span></h1>
+      <p class="tagline">
+        Software Engineering student passionate about full‑stack development, system design, and AI‑inspired ideas.
+      </p>
+      <div class="terminal-container" aria-label="Terminal simulation">
+        <div class="terminal-bar" aria-hidden="true">
+          <div class="circle red"></div>
+          <div class="circle yellow"></div>
+          <div class="circle green"></div>
+        </div>
+        <div class="terminal" id="terminal" aria-live="polite" role="log"></div>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>About Me</h2>
+      <p>
+        I'm a software engineering student focused on building clean, performant software systems. I have a strong interest in 
+        AI product development, exploring how intelligent systems can enhance real-world applications, and everything CS in general.
+      </p>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        <article class="project-card" tabindex="0">
+          <img src="assets/electronics.png" alt="Electronics Store Web App screenshot" />
+          <h3>Electronics Store Web App</h3>
+          <p class="project-tech">MERN Stack · Tailwind · AI Chatbot · Admin+User Side</p>
+          <a href="https://github.com/Shoaib-Asghar/electronics-store-mern" target="_blank" rel="noopener" class="project-github-link" aria-label="GitHub repository for Electronics Store Web App">
+            View on GitHub
+          </a>
+        </article>
+
+        <article class="project-card" tabindex="0">
+          <img src="assets/fx.png" alt="FX Store - EStore Desktop aapplication" />
+          <h3>FX Store - EStore Desktop application</h3>
+          <p class="project-tech">JavaFX GUI · MVC Architecture · Scene Builder · SQL Database</p>
+          <a href="https://github.com/Shoaib-Asghar/EStore-JavaFX" target="_blank" rel="noopener" class="project-github-link" aria-label="GitHub repository for FX Store - EStore Desktop aapplication">
+            View on GitHub
+          </a>
+        </article>
+
+        <article class="project-card" tabindex="0">
+          <img src="assets/stocks.png" alt="Real-Time Stock Market Updates System screenshot" />
+          <h3>Real-Time Stock Market Update System</h3>
+          <p class="project-tech">Java · Socket Programming · Multithreading</p>
+          <a href="https://github.com/Shoaib-Asghar/Stock-Market-Application-Multi-threaded-Server-Client" target="_blank" rel="noopener" class="project-github-link" aria-label="Real-Time Stock Market Updates System">
+            View on GitHub
+          </a>
+        </article> 
+        </article>
+      </div>
+    </section>
+
+    <section id="skills">
+  <h2>Skills</h2>
+  <div class="skills-grid">
+    <div>
+      <h3>Programming</h3>
+      <ul>
+        <li>Java, JavaFX, C++, SQL, OOP, PHP</li>
+        <li>Git, Figma, Bash</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Web Dev</h3>
+      <ul>
+        <li>MERN Stack</li>
+        <li>HTML, CSS, JavaScript, React, Node.js, Express.js, MongoDB</li>
+        <li>REST APIs, Bootstrap, SASS, JQuery, Tailwind CSS</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Testing</h3>
+        <ul>
+            <li>Cypress</li>
+            <li>Jest</li>
+        </ul>
+    </div>
+    <div>
+      <h3>Mobile Development</h3>
+      <ul>
+        <li>Native Android (Java)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="organizations">
+  <h2>Organizations</h2>
+  <div class="org-card">
+    <h3>InnoNerds Community</h3>
+    <p><strong>Role:</strong> General Secretary</p>
+    <p><strong>Duration:</strong> Oct 2024 – Present</p>
+  </div>
+</section> 
+
+<section id="certificates">
+  <h2>Certificates</h2>
+  <div class="certificates-grid">
+    <div class="certificate-card">
+      <h3>Mobile App Development</h3>
+      <p class="issuer">NAVTTC Summer of Code</p>
+    </div>
+    <div class="certificate-card">
+      <h3>Responsive Web Design</h3>
+      <p class="issuer">FreeCodeCamp</p>
+    </div>
+    <div class="certificate-card">
+      <h3>JavaScript Algorithms & Data Structures</h3>
+      <p class="issuer">FreeCodeCamp</p>
+    </div>
+    <div class="certificate-card">
+      <h3>The Bits and Bytes of Computer Networking</h3>
+      <p class="issuer">Google</p>
+    </div>
+    <div class="certificate-card">
+      <h3>Generative AI for Software Development</h3>
+      <p class="issuer">DeepLearning.AI</p>
+    </div>
+    <div class="certificate-card">
+      <h3>Introduction to Front-End Development</h3>
+      <p class="issuer">Meta</p>
+    </div>
+    <div class="certificate-card">
+      <h3>Programming with JavaScript</h3>
+      <p class="issuer">Meta</p>
+    </div>
+    <div class="certificate-card">
+      <h3>Version Control</h3>
+      <p class="issuer">Meta</p>
+    </div>
+    <div class="certificate-card">
+      <h3>React Basics</h3>
+      <p class="issuer">Meta</p>
+    </div>
+    <div class="certificate-card">
+      <h3>Master Express Framework</h3>
+      <p class="issuer">Packt</p>
+    </div>
+    <div class="certificate-card">
+      <h3>Learn to Work with APIs</h3>
+      <p class="issuer">Scrimba</p>
+    </div>
+    <div class="certificate-card">
+      <h3>Learn React</h3>
+      <p class="issuer">Scrimba</p>
+    </div>
+  </div>
+</section>
+
+    
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:shoaibcfc@gmail.com" class="email-link">shoaibcfc@gmail.com</a></p>
+      <div class="social-links">
+        <a href="https://github.com/Shoaib-Asghar" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/in/YOUR_PROFILE" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Will be improving this over time ✊</p>
+  </footer>
+</body>
+</html>

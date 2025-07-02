@@ -1,0 +1,403 @@
+:root {
+  --bg: #0d1117;
+  --text: #c9d1d9;
+  --accent: #58a6ff;
+
+  --code-bg: #161b22;
+  --code-text: #c9d1d9;
+
+  --card-bg: rgba(24,30,48,0.8);
+  --header-bg: rgba(13,17,23,0.85);
+
+  --link-hover: #90caff;
+}
+
+/* Light theme */
+body.light-theme {
+  --bg: #f5f3f0;
+  --text: #2c2c2c;
+  --accent: #0057e7;
+
+  --code-bg: #eaeaea;
+  --code-text: #2c2c2c;
+
+  --card-bg: #ffffff;
+  --header-bg: rgba(255,255,255,0.9);
+
+  --link-hover: #0066ff;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+  transition: background 0.3s, color 0.3s;
+}
+
+section {
+  padding: 2rem;
+  max-width: 1300px;
+  margin: auto;
+}
+
+/* Header and navigation styles */
+header {
+  background: var(--header-bg);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: saturate(180%) blur(10px);
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--accent);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+nav a,
+nav button {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+nav a:hover,
+nav button:hover {
+  color: var(--link-hover);
+}
+
+/* Terminal Container */
+.terminal-container {
+  max-width: 700px;
+  margin: 2rem auto;
+  background: var(--card-bg);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(88, 166, 255, 0.25);
+  transition: background 0.3s;
+}
+
+/* Terminal Window Bar */
+.terminal-bar {
+  display: flex;
+  gap: 8px;
+  padding: 0.5rem 1rem;
+  background: var(--code-bg);
+  border-bottom: 1px solid var(--accent);
+}
+
+.circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.red {
+  background: #ff5f56;
+}
+
+.yellow {
+  background: #ffbd2e;
+}
+
+.green {
+  background: #27c93f;
+}
+
+/* Terminal Area */
+.terminal {
+  background: var(--code-bg);
+  color: var(--code-text);
+  font-family: 'Fira Code', monospace;
+  padding: 12px 30px 30px;
+  border-radius: 0 0 8px 8px;
+  white-space: pre-wrap;
+  overflow-y: auto;
+  box-shadow: 0 0 12px rgba(88, 166, 255, 0.2);
+  transition: background 0.3s, color 0.3s;
+  text-align: left;
+  min-height: 200px;
+}
+
+/* Terminal Lines */
+.terminal .line {
+  margin: 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.terminal .line:first-child {
+  margin-top: 0;
+}
+
+/* Prompt */
+.prompt {
+  color: var(--accent);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* Command */
+.command {
+  opacity: 0.9;
+  white-space: nowrap;
+}
+
+/* Output Lines */
+.output.line {
+  white-space: pre-wrap;
+  color: var(--code-text);
+  margin-left: 1.8rem; /* Indent output under commands */
+  display: block;
+  gap: 0;
+}
+
+/* Caret only on the final line */
+.command.caret::after {
+  content: '|';
+  animation: blink 1s step-start infinite;
+  color: var(--accent);
+  margin-left: 2px;
+}
+
+/* Blink animation */
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Highlight for your name in hero */
+.highlight {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* Tagline styling */
+.tagline {
+  font-size: 1.25rem;
+  margin-top: 0.25rem;
+  color: var(--text);
+  opacity: 0.8;
+}
+
+/* Project grid and cards */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.project-card {
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.project-card:focus,
+.project-card:hover {
+  box-shadow: 0 6px 24px rgba(88, 166, 255, 0.5);
+  outline: none;
+}
+
+.project-card img {
+    /* align image to center */
+  display: block;
+    margin: 0 auto;
+
+
+    max-width: 100%;
+  max-height: 150px;
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+}
+
+.project-card h3 {
+  /* margin: 0.25rem 0; */
+  /* margin-bottom: 0; */
+}
+
+.project-tech {
+  font-size: 0.9rem;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.project-github-link {
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.project-github-link:hover,
+.project-github-link:focus {
+  text-decoration: underline;
+}
+
+
+
+
+
+/* Skills section */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.skills-grid h3 {
+  color: var(--accent);
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.skills-grid ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skills-grid li {
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+}
+
+/* Organizations */
+.org-card {
+  background: var(--card-bg);
+  padding: 1rem 1.5rem;
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(88, 166, 255, 0.2);
+  max-width: 600px;
+  margin-top: 1rem;
+}
+
+.org-card h3 {
+  margin: 0 0 0.5rem;
+  color: var(--accent);
+}
+
+.org-card p {
+  margin: 0.2rem 0;
+  font-size: 0.95rem;
+}
+
+
+
+/* Certificates Grid */
+.certificates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* Certificate Card */
+.certificate-card {
+  background: var(--card-bg);
+  border-left: 4px solid var(--accent);
+  padding: 1rem 1.2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 18px rgba(88, 166, 255, 0.15);
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.certificate-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(88, 166, 255, 0.3);
+}
+
+.certificate-card h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.1rem;
+  color: var(--accent);
+}
+
+.certificate-card .issuer {
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+.certificate-card .date {
+  font-size: 0.85rem;
+  color: var(--text);
+  opacity: 0.6;
+  margin-top: 0.2rem;
+  display: block;
+}
+
+
+
+
+
+
+/* Social Links */
+.social-links a {
+  margin-right: 1rem;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.social-links a:hover,
+.social-links a:focus {
+  text-decoration: underline;
+}
+
+/* Email link style */
+.email-link {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.email-link:hover,
+.email-link:focus {
+  text-decoration: underline;
+}
+
+/* Footer */
+footer {
+  margin: 3rem 0 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text);
+  opacity: 0.7;
+}
