@@ -1,0 +1,44 @@
+/* ============================================================
+   KEYFRAME ANIMATIONS
+   ============================================================ */
+
+/* ── Marquee continuous scroll ── */
+@keyframes marquee-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── Status pulse ── */
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.5); }
+  50%      { box-shadow: 0 0 0 6px rgba(74, 222, 128, 0); }
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  [data-reveal] {
+    clip-path: none;
+    opacity: 1;
+  }
+
+  .hero-name-line {
+    opacity: 1;
+  }
+
+  .hero-rule {
+    width: 280px;
+  }
+
+  .marquee-track {
+    animation: none;
+  }
+}

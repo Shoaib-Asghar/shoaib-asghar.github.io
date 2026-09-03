@@ -1,0 +1,630 @@
+/* ============================================================
+   HUD OVERLAY CSS - Blade Runner Style
+   ============================================================ */
+
+/* The hidden/active states of the HUD layer */
+.hud-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: #03080a;
+  /* Deep near-black cyan-tinted background */
+  color: #ffb000;
+  /* Primary Amber */
+  font-family: 'JetBrains Mono', monospace;
+  overflow: hidden;
+
+  /* Initial state: hidden */
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+/* Thematic Scanner Wipe Animation */
+.hud-overlay.active {
+  pointer-events: auto;
+  visibility: visible;
+  opacity: 1;
+  animation: crt-wipe 0.6s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+@keyframes crt-wipe {
+  0% {
+    clip-path: inset(0 0 100% 0);
+  }
+
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.hud-overlay::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--hud-cyan);
+  box-shadow: 0 0 15px 5px var(--hud-cyan);
+  z-index: 10000;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.hud-overlay.active::after {
+  animation: scan-laser 0.6s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+@keyframes scan-laser {
+  0% {
+    top: 0%;
+    opacity: 1;
+  }
+
+  95% {
+    top: 100%;
+    opacity: 1;
+  }
+
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+/* ── 3D Endless Horizon Grid ── */
+.hud-horizon {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  /* Below the panels, acts as background */
+  overflow: hidden;
+  pointer-events: none;
+  perspective: 600px;
+}
+
+.horizon-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--hud-cyan);
+  box-shadow: 0 0 30px 10px var(--hud-cyan);
+  opacity: 1;
+}
+
+.horizon-grid {
+  position: absolute;
+  width: 200vw;
+  height: 100vh;
+  left: -50vw;
+  top: 50%;
+  transform-origin: top center;
+  transform: rotateX(75deg);
+  background-image:
+    linear-gradient(var(--hud-cyan) 1px, transparent 1px),
+    linear-gradient(90deg, var(--hud-cyan) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 1;
+  animation: grid-fly 2s linear infinite;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 15%, rgba(0, 0, 0, 0) 80%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 15%, rgba(0, 0, 0, 0) 80%);
+}
+
+@keyframes grid-fly {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 0 50px;
+  }
+}
+
+/* Viewport Corners */
+.hud-corner {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border: 4px solid var(--hud-amber);
+  opacity: 0.5;
+  z-index: 10000;
+}
+
+.hud-corner.top-left {
+  top: 10px;
+  left: 10px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.hud-corner.top-right {
+  top: 10px;
+  right: 10px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.hud-corner.bot-left {
+  bottom: 10px;
+  left: 10px;
+  border-right: none;
+  border-top: none;
+}
+
+.hud-corner.bot-right {
+  bottom: 10px;
+  right: 10px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Palette Variables for HUD */
+:root {
+  --hud-amber: #ffb000;
+  --hud-amber-dim: rgba(255, 176, 0, 0.3);
+  --hud-cyan: #00fff5;
+  --hud-cyan-dim: rgba(0, 255, 245, 0.2);
+  --hud-bg: #03080a;
+  --hud-panel-bg: rgba(20, 25, 30, 0.5);
+}
+
+/* ── CRT Effects ── */
+.hud-scanlines {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0) 50%,
+      rgba(0, 0, 0, 0.2) 50%,
+      rgba(0, 0, 0, 0.2));
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0.6;
+}
+
+.hud-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 50%, rgba(0, 0, 0, 0.8) 100%);
+  pointer-events: none;
+  z-index: 11;
+}
+
+/* ── HUD Layout ── */
+.hud-container {
+  position: relative;
+  z-index: 20;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.hud-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--hud-amber);
+  margin-bottom: 1rem;
+  text-shadow: 0 0 5px var(--hud-amber);
+}
+
+.hud-logo {
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.hud-status {
+  color: var(--hud-cyan);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.blink {
+  animation: blink-anim 2s infinite;
+}
+
+@keyframes blink-anim {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.hud-btn-exit {
+  background: transparent;
+  color: var(--hud-amber);
+  border: 1px solid var(--hud-amber);
+  padding: 0.25rem 0.75rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.hud-btn-exit:hover {
+  background: var(--hud-amber);
+  color: var(--hud-bg);
+}
+
+/* ── Panels Grid ── */
+.hud-grid {
+  display: grid;
+  grid-template-columns: 250px 1fr 300px;
+  gap: 1.5rem;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.hud-panel {
+  position: relative;
+  background: var(--hud-panel-bg);
+  border: 1px solid var(--hud-amber-dim);
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Angular clip paths for that Sci-Fi HUD look */
+.panel-left {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);
+  border-bottom: 2px solid var(--hud-amber);
+}
+
+.panel-center {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 30px 100%, 0 calc(100% - 30px));
+  border-left: 2px solid var(--hud-amber);
+}
+
+.panel-right {
+  clip-path: polygon(0 30px, 30px 0, 100% 0, 100% 100%, 0 100%);
+  border-top: 2px solid var(--hud-amber);
+}
+
+.panel-glare {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.03), transparent);
+  pointer-events: none;
+}
+
+.panel-content {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* Custom Scrollbar for HUD */
+.panel-content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.panel-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.panel-content::-webkit-scrollbar-thumb {
+  background: var(--hud-amber-dim);
+}
+
+/* ── Panel Interiors ── */
+.hud-section-title {
+  font-size: 0.8rem;
+  color: var(--hud-cyan);
+  margin-bottom: 1rem;
+  letter-spacing: 2px;
+  border-bottom: 1px solid var(--hud-cyan-dim);
+  padding-bottom: 0.5rem;
+}
+
+/* Bio-Scan Radar */
+.hud-bio-container {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+.hud-bio-scan {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 1px solid var(--hud-cyan-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: inset 0 0 10px var(--hud-cyan-dim);
+}
+.bio-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid var(--hud-cyan);
+  opacity: 0.5;
+}
+.bio-ring.r1 { width: 40px; height: 40px; border-style: dashed; animation: spin 4s linear infinite; }
+.bio-ring.r2 { width: 50px; height: 50px; opacity: 0.2; }
+.bio-core {
+  width: 8px;
+  height: 8px;
+  background: var(--hud-amber);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--hud-amber);
+  animation: pulse-core 2s infinite;
+}
+.bio-sweep {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 50%; height: 50%;
+  transform-origin: 0% 0%;
+  background: conic-gradient(from 0deg, transparent 60%, rgba(0, 255, 245, 0.4) 100%);
+  animation: spin 2s linear infinite;
+}
+@keyframes pulse-core {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+.hud-bio-details {
+  flex-grow: 1;
+}
+.hud-bio-details .hud-data-row {
+  margin-bottom: 0.25rem;
+  font-size: 0.75rem;
+}
+
+.hud-data-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.d-label {
+  opacity: 0.7;
+}
+
+.d-val {
+  font-weight: 700;
+  text-shadow: 0 0 2px var(--hud-amber);
+}
+
+.hud-separator {
+  height: 1px;
+  background: var(--hud-amber-dim);
+  margin: 1.5rem 0;
+}
+
+.hud-skill-list {
+  list-style: none;
+  font-size: 0.85rem;
+}
+
+.hud-skill-list li {
+  margin-bottom: 0.5rem;
+}
+
+.hud-skill-list li::before {
+  content: '>';
+  color: var(--hud-cyan);
+  margin-right: 0.5rem;
+}
+
+/* Sensor Bar */
+.hud-sensor {
+  margin-top: auto;
+}
+
+.sensor-bar {
+  height: 10px;
+  border: 1px solid var(--hud-amber);
+  padding: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.sensor-fill {
+  height: 100%;
+  width: 0%; /* Starts at 0 */
+  background: var(--hud-amber);
+  box-shadow: 0 0 10px var(--hud-amber);
+}
+.hud-overlay.active .sensor-fill {
+  animation: fill-up 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+}
+@keyframes fill-up {
+  0% { width: 0%; }
+  100% { width: 99.6%; }
+}
+
+.sensor-readout {
+  font-size: 0.75rem;
+  text-align: right;
+}
+
+/* ── Center Panel (Projects) ── */
+.hud-nav {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.hud-nav-btn {
+  background: transparent;
+  color: var(--hud-amber);
+  border: 1px solid var(--hud-amber-dim);
+  padding: 0.25rem 1rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.hud-nav-btn:hover,
+.hud-nav-btn.active {
+  background: var(--hud-amber-dim);
+  border-color: var(--hud-amber);
+  box-shadow: 0 0 8px var(--hud-amber-dim);
+}
+
+.hud-proj-display {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: hud-glitch-in 0.3s ease-out;
+}
+
+@keyframes hud-glitch-in {
+  0% {
+    transform: scale(0.98);
+    opacity: 0;
+    filter: blur(4px);
+  }
+
+  50% {
+    transform: scale(1.01);
+    filter: blur(2px);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.hud-proj-img {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  border: 1px solid var(--hud-cyan);
+  overflow: hidden;
+}
+
+.hud-proj-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(1) hue-rotate(180deg) saturate(300%) brightness(0.6) contrast(1.5);
+  /* Makes images cyan/blue tinted */
+}
+
+.hud-override {
+  --vis-accent: var(--hud-cyan);
+  --vis-bg: transparent;
+  --vis-grid: var(--hud-cyan-dim);
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  border: none;
+}
+
+.hud-override .radar-sweep {
+  background: conic-gradient(from 0deg, transparent 70%, rgba(0, 255, 245, 0.4) 100%);
+}
+
+.hud-override.radar-vis {
+  background-image: radial-gradient(var(--hud-cyan-dim) 1px, transparent 1px);
+}
+
+.img-wireframe {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(var(--hud-cyan-dim) 1px, transparent 1px),
+    linear-gradient(90deg, var(--hud-cyan-dim) 1px, transparent 1px);
+  background-size: 20px 20px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hud-proj-title {
+  font-size: 1.5rem;
+  color: var(--hud-cyan);
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 5px var(--hud-cyan);
+}
+
+.hud-proj-desc {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.hud-proj-tech {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+/* ── Right Panel (Terminal Feed) ── */
+.hud-terminal {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  opacity: 0.8;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.term-line {
+  word-break: break-all;
+}
+
+/* Live Data Stream */
+.hud-data-stream {
+  margin-top: 15px;
+  font-size: 0.6rem;
+  color: var(--hud-cyan);
+  line-height: 1.4;
+  height: 80px;
+  overflow: hidden;
+  opacity: 0.7;
+}
+
+.hud-data-stream p {
+  margin: 0;
+  animation: glitch-in 0.1s ease-out;
+}
+
+@keyframes glitch-in {
+  0% {
+    transform: translateX(-5px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* ── Responsive HUD ── */
+@media (max-width: 1024px) {
+  .hud-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    overflow-y: auto;
+  }
+
+  .hud-panel {
+    min-height: 300px;
+    clip-path: none !important;
+    border: 1px solid var(--hud-amber) !important;
+  }
+}
